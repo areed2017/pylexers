@@ -1,4 +1,3 @@
-
 class _NFA:
     pass
 
@@ -37,7 +36,9 @@ class NFA(_NFA):
                 if epsilon_state not in epsilon_visited:
                     epsilon_visited.add(epsilon_state)
                     if "EPSILON" in epsilon_state.transitions:
-                        epsilon_transitions = epsilon_transitions.union(epsilon_state.transitions["EPSILON"])
+                        epsilon_transitions = epsilon_transitions.union(
+                            epsilon_state.transitions["EPSILON"]
+                        )
                     for key in epsilon_state.transitions.keys():
                         for state in epsilon_state.transitions[key]:
                             self.add_transition(state, key)
@@ -62,7 +63,7 @@ class NFA(_NFA):
 
     def __str__(self):
         return self.name + f"({len(self.transitions)})"
-    
+
     def __repr__(self):
         return str(self)
 
@@ -87,4 +88,3 @@ def _combine_nfas(nfas: list):
         initial_state.add_transition(nfa, "EPSILON")
         initial_state.final_states = initial_state.final_states.union(nfa.final_states)
     return initial_state
-

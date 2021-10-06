@@ -1,36 +1,39 @@
 from string import printable
 
-from RegularExpressions.builders import _build_or, _build_symbol, _build_concat, _build_kleene_star
+from RegularExpressions.util import (
+    _build_or,
+    _build_symbol,
+    _build_concat,
+    _build_kleene_star,
+    _build_epsilon,
+)
 
-
-class _RegularExpression:
-    def __init__(self, re):
-        self.re = re
-
+from RegularExpressions.util import _RegularExpression
 
 """
 Basic Regular Expressions
 """
 
 
-class SymbolRegularExpression(_RegularExpression):
-    def __init__(self, character: chr):
-        super().__init__(_build_symbol(character))
+def Symbol(character: chr):
+    return _build_symbol(character)
 
 
-class OrRegularExpression(_RegularExpression):
-    def __init__(self, regular_expression_1: _RegularExpression, regular_expression_2: _RegularExpression):
-        super().__init__(_build_or(regular_expression_1.re, regular_expression_2.re))
+def Or(*regular_expressions: _RegularExpression) -> _RegularExpression:
+    re = regular_expressions[0]
+    for r in regular_expressions[1:]:
+        re = _build_or(re, r)
+    return re
 
 
-class ConcatRegularExpression(_RegularExpression):
-    def __init__(self, regular_expression_1: _RegularExpression, regular_expression_2: _RegularExpression):
-        super().__init__(_build_concat(regular_expression_1.re, regular_expression_2.re))
+def Concat(
+    regular_expression_1: _RegularExpression, regular_expression_2: _RegularExpression
+) -> _RegularExpression:
+    return _build_concat(regular_expression_1, regular_expression_2)
 
 
-class KleeneStarRegularExpression(_RegularExpression):
-    def __init__(self, regular_expression: _RegularExpression):
-        super().__init__(_build_kleene_star(regular_expression.re))
+def Star(regular_expression: _RegularExpression) -> _RegularExpression:
+    return _build_kleene_star(regular_expression)
 
 
 """
@@ -38,35 +41,28 @@ Extended Regular Expressions
 """
 
 
-class SigmaRegularExpression(_RegularExpression):
-    @staticmethod
-    def build_re(alphabet: str, exclude: str) -> list:
-        for ex in exclude:
-            alphabet = alphabet.replace(ex, "")
+def Sigma(alphabet: str = printable, exclude: str = "") -> _RegularExpression:
+    for ex in exclude:
+        alphabet = alphabet.replace(ex, "")
 
-        re = _build_symbol(alphabet[0])
-        for symbol in alphabet[1:]:
-            re = _build_or(_build_symbol(symbol), re)
-        return re
-
-    def __init__(self, alphabet=printable, exclude=""):
-        super().__init__(self.build_re(alphabet, exclude))
+    re = _build_symbol(alphabet[0])
+    for symbol in alphabet[1:]:
+        re = _build_or(_build_symbol(symbol), re)
+    return re
 
 
-class StringRegularExpression(_RegularExpression):
-    @staticmethod
-    def build_re(string: str) -> list:
-        re = _build_symbol(string[0])
-        for symbol in string[1:]:
-            re = _build_concat(re, _build_symbol(symbol))
-        return re
+def String(string: str) -> _RegularExpression:
+    def _build_string(s):
+        if len(s) == 1:
+            return _build_symbol(s)
+        return _build_concat(_build_symbol(s[0]), _build_string(s[1:]))
 
-    def __init__(self, string: str):
-        super().__init__(self.build_re(string))
+    return _build_string(string)
 
 
-class AtLeastOneRegularExpression(_RegularExpression):
-    def __init__(self, regular_expression: _RegularExpression):
-        super().__init__(_build_concat(regular_expression.re, _build_kleene_star(regular_expression.re)))
+def AtLeastOne(regular_expression: _RegularExpression) -> _RegularExpression:
+    return _build_concat(regular_expression, _build_kleene_star(regular_expression))
 
 
+def Optional(regular_expression: _RegularExpression) -> _RegularExpression:
+    return _build_or(regular_expression, _build_epsilon())

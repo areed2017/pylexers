@@ -6,7 +6,7 @@ from NFALexer.nfa_from_re import _regular_expression_to_nfa
 class NFALexer(Lexer):
     def __init__(self, regular_expressions: list, tokenize_functions: list):
         super().__init__(regular_expressions, tokenize_functions)
-        nfa_list = [_regular_expression_to_nfa(re.re) for re in regular_expressions]
+        nfa_list = [_regular_expression_to_nfa(re) for re in regular_expressions]
         self.tokenize_functions = dict()
         for i in range(len(nfa_list)):
             for accepting_state in nfa_list[i].final_states:

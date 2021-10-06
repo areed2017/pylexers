@@ -1,4 +1,4 @@
-from RegularExpressions import ConcatRegularExpression, AtLeastOneRegularExpression, \
-    OrRegularExpression, SigmaRegularExpression, StringRegularExpression, KleeneStarRegularExpression, \
-    SymbolRegularExpression
+from RegularExpressions import Concat, AtLeastOne, Or, Sigma, String, Star, Symbol
 from NFALexer import NFALexer
+from DFALexer import DFALexer
+from DerivativeLexer import DerivativeLexer

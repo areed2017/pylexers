@@ -1,6 +1,13 @@
 from NFALexer.NFA import NFA
-from RegularExpressions.util import _get_regular_expression_arg1, _get_regular_expression_arg2, _is_epsilon, _is_symbol, \
-    _is_concat, _is_or, _is_kleene_star
+from RegularExpressions.util import (
+    _get_regular_expression_arg1,
+    _get_regular_expression_arg2,
+    _is_epsilon,
+    _is_symbol,
+    _is_concat,
+    _is_or,
+    _is_kleene_star,
+)
 
 
 def _nfa_from_re_epsilon():
