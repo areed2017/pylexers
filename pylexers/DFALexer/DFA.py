@@ -1,5 +1,5 @@
-from RegularExpressions import _RegularExpression
-from RegularExpressions.util import _build_empty_set
+from pylexers.RegularExpressions import _RegularExpression
+from pylexers.RegularExpressions.util import _build_empty_set
 
 
 class DFA:

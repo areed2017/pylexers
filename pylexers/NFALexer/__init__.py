@@ -1,6 +1,6 @@
-from BaseLexer import Lexer
-from NFALexer.NFA import NFA, _combine_nfas
-from NFALexer.nfa_from_re import _regular_expression_to_nfa
+from pylexers.BaseLexer import Lexer
+from pylexers.NFALexer.NFA import NFA, _combine_nfas
+from pylexers.NFALexer.nfa_from_re import _regular_expression_to_nfa
 
 
 class NFALexer(Lexer):

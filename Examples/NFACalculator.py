@@ -1,6 +1,6 @@
 from BaseLexer import build_token_func
 from DerivativeLexer import DerivativeLexer
-from PyLexer import AtLeastOneRegularExpression, KleeneStarRegularExpression, StringRegularExpression, \
+from pylexers import AtLeastOneRegularExpression, KleeneStarRegularExpression, StringRegularExpression, \
     SigmaRegularExpression, SymbolRegularExpression, ConcatRegularExpression, OrRegularExpression, \
     NFALexer
 

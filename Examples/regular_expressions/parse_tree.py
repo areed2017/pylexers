@@ -1,9 +1,9 @@
 import dataclasses
 import typing
 
-from BaseLexer import Lexer
-from PySymbolTable import SymbolTable
-from RegularExpressions import _RegularExpression, Sigma, Concat, Or, Star, Symbol
+from pylexers.BaseLexer import Lexer
+from pylexers.PySymbolTable import SymbolTable
+from pylexers.RegularExpressions import _RegularExpression, Sigma, Concat, Or, Star, Symbol
 
 
 @dataclasses.dataclass

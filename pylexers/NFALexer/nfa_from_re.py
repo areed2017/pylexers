@@ -1,5 +1,5 @@
-from NFALexer.NFA import NFA
-from RegularExpressions.util import (
+from pylexers.NFALexer.NFA import NFA
+from pylexers.RegularExpressions.util import (
     _get_regular_expression_arg1,
     _get_regular_expression_arg2,
     _is_epsilon,

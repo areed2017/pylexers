@@ -1,8 +1,8 @@
 import dataclasses
 from typing import Optional
 
-from PyLexer import String, NFALexer, Symbol, Sigma
-from PySymbolTable import SymbolTable
+from pylexers import String, NFALexer, Symbol, Sigma
+from SymbolTable import SymbolTable
 from parse_tree import build_regular_expression
 
 regular_expressions = [

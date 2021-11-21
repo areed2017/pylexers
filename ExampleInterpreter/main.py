@@ -1,8 +1,8 @@
 import string
 
 from BaseLexer import Lexer
-from PyLexer import AtLeastOne, Concat, Sigma, Symbol, Star, DerivativeLexer, Or, DFALexer, NFALexer
-from PySymbolTable import SymbolTable
+from pylexers import AtLeastOne, Concat, Sigma, Symbol, Star, DerivativeLexer, Or, DFALexer, NFALexer
+from SymbolTable import SymbolTable
 
 example_file = """
 set('i', 100)

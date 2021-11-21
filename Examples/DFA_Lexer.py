@@ -1,4 +1,4 @@
-from PyLexer import AtLeastOne, Sigma, Symbol, DFALexer, Star, Concat, String
+from pylexers import AtLeastOne, Sigma, Symbol, DFALexer, Star, Concat, String
 
 source_program = "12. + 5 - 750.5"
 numbers = "0123456789"

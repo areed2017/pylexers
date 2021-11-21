@@ -1,4 +1,4 @@
-from PyLexer import AtLeastOne, Sigma, Symbol, NFALexer
+from pylexers import AtLeastOne, Sigma, Symbol, NFALexer
 
 source_program = "12 + 5 - 750"
 numbers = "0123456789"

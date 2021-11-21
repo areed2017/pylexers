@@ -1,3 +1,4 @@
+
 class Lexer:
     def __init__(self, regular_expressions: list, tokenize_functions: list):
         self.regular_expressions = regular_expressions

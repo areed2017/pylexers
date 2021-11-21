@@ -1,4 +1,4 @@
-from PyLexer import DerivativeLexer, AtLeastOne, Sigma, Symbol, Star, Concat, String
+from pylexers import DerivativeLexer, AtLeastOne, Sigma, Symbol, Star, Concat, String
 
 source_program = "12. + 5 - 750.5"
 numbers = "0123456789"

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1'
+VERSION = '1.1'
 DESCRIPTION = 'PyLexer is a python lexical analyzer generator.'
 LONG_DESCRIPTION = 'PyLexer can be used to make many different types of ' \
                    'lexical analyzer generators for your project.'
@@ -8,7 +8,7 @@ LONG_DESCRIPTION = 'PyLexer can be used to make many different types of ' \
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="PyLexer",
+    name="PyLexers",
     version=VERSION,
     author="Andrew Reed",
     author_email="andrewreed2017@icloud.com",

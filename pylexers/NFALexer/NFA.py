@@ -1,3 +1,4 @@
+
 class _NFA:
     pass
 
