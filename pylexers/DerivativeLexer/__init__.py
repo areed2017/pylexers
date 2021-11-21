@@ -1,17 +1,17 @@
 from pylexers.BaseLexer import Lexer
-from pylexers.RegularExpressions.util import _is_epsilon, _RegularExpression, _is_empty_set
+from pylexers.RegularExpressions.BaseRegularExpressions import _RegularExpression
 
 
 class DerivativeLexer(Lexer):
     def get_successful_id(self, derivatives: list[_RegularExpression]):
         for index in range(len(derivatives)):
-            if _is_epsilon(derivatives[index].nullable()):
+            if derivatives[index].nullable().is_epsilon():
                 return index
         return True
 
     def is_failure_state(self, derivatives: list[_RegularExpression]):
         for derivative_ in derivatives:
-            if not _is_empty_set(derivative_.simplify()):
+            if not derivative_.simplify().is_empty_set():
                 return False
         return True
 

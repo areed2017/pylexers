@@ -1,13 +1,8 @@
-from pylexers.NFALexer.NFA import NFA
-from pylexers.RegularExpressions.util import (
+from pylexers.RegularExpressions.BaseRegularExpressions import (
     _get_regular_expression_arg1,
-    _get_regular_expression_arg2,
-    _is_epsilon,
-    _is_symbol,
-    _is_concat,
-    _is_or,
-    _is_kleene_star,
+    _get_regular_expression_arg2
 )
+from pylexers.NFALexer.NFA import NFA
 
 
 def _nfa_from_re_epsilon():
@@ -62,15 +57,15 @@ def _nfa_from_re_kleene_star(re):
 
 
 def _regular_expression_to_nfa(re):
-    if _is_epsilon(re):
+    if re.is_epsilon():
         return _nfa_from_re_epsilon()
-    elif _is_symbol(re):
+    elif re.is_symbol():
         return _nfa_from_re_symbol(re)
-    elif _is_concat(re):
+    elif re.is_concat():
         return _nfa_from_re_concat(re)
-    elif _is_or(re):
+    elif re.is_or(re):
         return _nfa_from_re_or(re)
-    elif _is_kleene_star(re):
+    elif re.is_kleene_star():
         return _nfa_from_re_kleene_star(re)
     else:
         raise SyntaxError("Encountered unknown regular expession")

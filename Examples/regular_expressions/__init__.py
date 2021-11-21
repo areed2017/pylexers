@@ -1,7 +1,7 @@
 import dataclasses
 from typing import Optional
 
-from pylexers import String, NFALexer, Symbol, Sigma
+from pylexers import String, NFALexer, _Symbol, Sigma
 from SymbolTable import SymbolTable
 from parse_tree import build_regular_expression
 
@@ -12,10 +12,10 @@ regular_expressions = [
     String("\S"),
     String("\w"),
     String("\W"),
-    Symbol("*"),
-    Symbol("|"),
-    Symbol("("),
-    Symbol(")"),
+    _Symbol("*"),
+    _Symbol("|"),
+    _Symbol("("),
+    _Symbol(")"),
     Sigma(exclude="*"),
 ]
 

@@ -1,3 +1,24 @@
+from dataclasses import dataclass
+from typing import TypeVar, Generic, Optional, Callable
+
+T = TypeVar("T")
+
+
+@dataclass(frozen=True)
+class Token(Generic[T]):
+    identifier: str
+    lexeme: str
+    value: T
+
+
+def build_token_func(
+    identifier: str,
+    process_lexeme_func: Optional[Callable[[str], T]]=None
+) -> Callable[[str], Token[T]]:
+    if process_lexeme_func:
+        return lambda lexeme: Token(identifier, lexeme, process_lexeme_func(lexeme))
+    return lambda lexeme: Token(identifier, lexeme, None)
+
 
 class Lexer:
     def __init__(self, regular_expressions: list, tokenize_functions: list):
@@ -11,17 +32,17 @@ class Lexer:
                 f"not the same length"
             )
 
-    def set_source_program(self, source_program):
+    def set_source_program(self, source_program) -> iter:
         self.source_program = source_program
         return iter(self)
 
-    def find_records(self):
+    def find_records(self) -> list:
         return []
 
-    def get_successful_id(self, states):
+    def get_successful_id(self, states) -> int:
         return -1
 
-    def is_failure_state(self, derivatives):
+    def is_failure_state(self, derivatives) -> bool:
         return True
 
     def __iter__(self, **kwargs):
@@ -68,7 +89,3 @@ class Lexer:
                         break
 
 
-def build_token_func(identifier, process_lexeme_func=None):
-    if process_lexeme_func:
-        return lambda lexeme: [identifier, lexeme, process_lexeme_func(lexeme)]
-    return lambda lexeme: [identifier, lexeme, None]

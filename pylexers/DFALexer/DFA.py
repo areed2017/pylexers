@@ -1,5 +1,5 @@
 from pylexers.RegularExpressions import _RegularExpression
-from pylexers.RegularExpressions.util import _build_empty_set
+from pylexers.RegularExpressions.BaseRegularExpressions import _EmptySet
 
 
 class DFA:
@@ -16,12 +16,12 @@ class DFA:
                 self.states[current][symbol] = current.derivative(symbol).simplify()
                 queue.add(self.states[current][symbol])
 
-        if _build_empty_set() not in self.states.keys():
-            self.states[_build_empty_set()] = dict()
+        if _EmptySet() not in self.states.keys():
+            self.states[_EmptySet()] = dict()
 
     def transition(self, state: _RegularExpression, symbol: chr):
         if state not in self.states:
             raise ValueError("Unknown State given to DFA")
         if symbol not in self.states[state]:
-            return _build_empty_set()
+            return _EmptySet()
         return self.states[state][symbol]

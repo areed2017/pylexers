@@ -2,8 +2,8 @@ import dataclasses
 import typing
 
 from pylexers.BaseLexer import Lexer
-from pylexers.PySymbolTable import SymbolTable
-from pylexers.RegularExpressions import _RegularExpression, Sigma, Concat, Or, Star, Symbol
+from pylexers.SymbolTable import SymbolTable
+from pylexers.RegularExpressions import _RegularExpression, Sigma, Concat, Or, _Star, _Symbol
 
 
 @dataclasses.dataclass
@@ -61,19 +61,19 @@ def _build_regular_expression(lexer: Lexer, symbol_table: SymbolTable) -> _Regul
         try:
             re = symbol_table.get_identifier("LAST_RE")
             if isinstance(re, _Group):
-                re = Star(re.re)
+                re = _Star(re.re)
             elif re.type == "OR":
-                re = Or(re.re1, Star(re.re2))
+                re = Or(re.re1, _Star(re.re2))
             elif re.type == "CONCAT":
-                re = Concat(re.re1, Star(re.re2))
+                re = Concat(re.re1, _Star(re.re2))
             else:
-                re = Star(re)
+                re = _Star(re)
             symbol_table.remove_identifier("LAST_RE")
         except RuntimeError:
-            raise SyntaxError("Kleene Star found without leading regular expression")
+            raise SyntaxError("Kleene _Star found without leading regular expression")
     elif next_token[0] == "SYMBOL":
         next(lexer)
-        re = Symbol(next_token[1])
+        re = _Symbol(next_token[1])
 
     if symbol_table.does_identifier_exist("LAST_RE"):
         re = Concat(get_last_re(symbol_table), re)
